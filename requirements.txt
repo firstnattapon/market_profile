@@ -1,0 +1,9 @@
+streamlit 
+pandas  
+ccxt  
+matplotlib  
+seaborn 
+numpy 
+scipy
+sympy
+pandas-ta == 0.1.39b
