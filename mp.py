@@ -43,7 +43,7 @@ class Run_model(object) :
         mp = MarketProfile(dataset)
         mp_slice = mp[dataset.index.min():dataset.index.max()]
         fig , (ax1, ax2 ,ax3) = plt.subplots(3 , figsize=(16, 24))
-        ax1.plot(dataset.Close , color='k', lw=1 , ls ='-.')
+        ax1.plot(dataset.Close , color='m'  , ls ='-.')
         ax1.axhline(y = mp_slice.poc_price , color='k' , ls ='--' ,lw= 2.5)
         ax1.axhline(y = mp_slice.value_area[0] , color='r' , ls ='--' ,lw= 2.5)
         ax1.axhline(y = mp_slice.value_area[1] , color='r', ls ='--' ,lw= 2.5)
@@ -68,16 +68,17 @@ class Run_model(object) :
         ax3.axhline()
         st.pyplot()
 
-        st.write("Initial balance: ".format(mp_slice.initial_balance()) )
-        st.write("Opening range: ".format(mp_slice.open_range()))
-        st.write("POC: ".format(mp_slice.poc_price))
-        st.write("Profile range: ".format(mp_slice.profile_range))
-        st.write("Value area: ".format(mp_slice.value_area))
-        st.write("Balanced Target: ".format(mp_slice.balanced_target))
+        st.write("Initial balance: {}".format(mp_slice.initial_balance()) )
+        st.write("Opening range: {}".format(mp_slice.open_range()))
+        st.write("POC: {}".format(mp_slice.poc_price))
+        st.write("Profile range: {}".format(mp_slice.profile_range))
+        st.write("Value area: {}".format(mp_slice.value_area))
+        st.write("Balanced Target: {}".format(mp_slice.balanced_target))
+
 
 if __name__ == "__main__":
     model =  Run_model()
-    model.pair_data =   st.sidebar.selectbox('data' ,('BTC/USDT', 'XRP/USDT' , 'EOS/USDT' ,'LINK/USDT' , 'ATOM/USDT' , 'THETA/USDT' ,  'XTZ/USDT' , 'ALGO/USDT'))
+    model.pair_data =   st.sidebar.selectbox('data' ,('BTC/USDT', 'XRP/USDT' , 'EOS/USDT' ,'LINK/USDT' , 'ATOM/USDT' , 'THETA/USDT' ,  'XTZ/USDT' , 'ALGO/USDT' ))
     model.timeframe =   st.sidebar.selectbox('timeframe',('1h', '4h' ,'1d' ,'1w'))
     model.loop_start =  np.datetime64(st.sidebar.date_input('loop_start', value= dt.datetime(2020, 7, 1, 0, 0)))
     model.limit     =  st.sidebar.number_input('limit' , value= 5000 )
