@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run market_profile.py
+web: sh setup.sh && streamlit run mp.py
