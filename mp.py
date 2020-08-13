@@ -42,13 +42,6 @@ class Run_model(object) :
         dataset['sp']  = sc.fit_transform(dataset[['sp']])
         mp = MarketProfile(dataset)
         mp_slice = mp[dataset.index.min():dataset.index.max()]
-        st.write("Initial balance: %f, %f" % mp_slice.initial_balance())
-        st.write("Opening range: %f, %f" % mp_slice.open_range())
-        st.write("POC: %f" % mp_slice.poc_price)
-        st.write("Profile range: %f, %f" % mp_slice.profile_range)
-        st.write("Value area: %f, %f" % mp_slice.value_area)
-        st.write("Balanced Target: %f" % mp_slice.balanced_target)
-
         fig , (ax1, ax2 ,ax3) = plt.subplots(3 , figsize=(16, 24))
         ax1.plot(dataset.Close , color='k', lw=1 , ls ='-.')
         ax1.axhline(y = mp_slice.poc_price , color='k' , ls ='--' ,lw= 2.5)
@@ -60,7 +53,7 @@ class Run_model(object) :
         # ax1.axhline(y = mp_slice.initial_balance()[0] , color='c')
         # ax1.axhline(y = mp_slice.initial_balance()[1] , color='c');
         for i in mp_slice.high_value_nodes.index :
-            ax1.axhline(y = i , color='k' , lw=0.10 ,  ls ='-.');
+            ax1.axhline(y = i , color='k' , lw=0.20 ,  ls ='-.');
         # for i in mp_slice.low_value_nodes.index:    
         #     ax1.axhline(y = i , color='m'  , lw=0.30 ,  ls ='-.');
 
@@ -72,12 +65,20 @@ class Run_model(object) :
         ax3.plot(dataset['y-ber'] , color='r', lw=1 , ls ='-.')
         ax3.plot(dataset['n-ber'] , color='k', lw=1 , ls ='-.');
         st.pyplot()
+        
+        st.write("Initial balance: ".format(mp_slice.initial_balance()) )
+        st.write("Opening range: ".format(mp_slice.open_range()))
+        st.write("POC: ".format(mp_slice.poc_price))
+        st.write("Profile range: ".format(mp_slice.profile_range))
+        st.write("Value area: ".format(mp_slice.value_area))
+        st.write("Balanced Target: " format(mp_slice.balanced_target))
+
 
 if __name__ == "__main__":
     model =  Run_model()
-    model.pair_data =   st.sidebar.selectbox('data' ,('BTC/USDT', 'XRP/USDT' , 'ETH/USDT' , 'LINK/USDT'))
+    model.pair_data =   st.sidebar.selectbox('data' ,('BTC-USDT', 'XRP-USDT'))
     model.timeframe =   st.sidebar.selectbox('timeframe',('1h', '4h' ,'1d' ,'1w'))
-    model.loop_start =  np.datetime64(st.sidebar.date_input('loop_start', value= dt.datetime(2020, 7, 10, 0, 0)))
+    model.loop_start =  np.datetime64(st.sidebar.date_input('loop_start', value= dt.datetime(2020, 7, 1, 0, 0)))
     model.limit     =  st.sidebar.number_input('limit' , value= 5000 )
     model.rolling = st.sidebar.number_input('rolling' , value= 168 )
     mp = model.mp()
