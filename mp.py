@@ -48,30 +48,32 @@ class Run_model(object) :
         ax1.axhline(y = mp_slice.value_area[0] , color='r' , ls ='--' ,lw= 2.5)
         ax1.axhline(y = mp_slice.value_area[1] , color='r', ls ='--' ,lw= 2.5)
         ax1.axhline(y = mp_slice.profile_range[0] , color='g')
-        ax1.axhline(y = mp_slice.profile_range[1] , color='g');
-        ax1.axhline(y = mp_slice.balanced_target , color='c');
+        ax1.axhline(y = mp_slice.profile_range[1] , color='g')
+        ax1.axhline(y = mp_slice.balanced_target , color='c')
         # ax1.axhline(y = mp_slice.initial_balance()[0] , color='c')
         # ax1.axhline(y = mp_slice.initial_balance()[1] , color='c');
         for i in mp_slice.high_value_nodes.index :
-            ax1.axhline(y = i , color='k' , lw=0.20 ,  ls ='-.');
+            ax1.axhline(y = i , color='k' , lw=0.20 ,  ls ='-.')
         # for i in mp_slice.low_value_nodes.index:    
         #     ax1.axhline(y = i , color='m'  , lw=0.30 ,  ls ='-.');
 
         ax2.plot(dataset['sp']  , color='k', lw=1 , ls ='-.');
         ax2.plot(dataset['x-cum']  , color='g', lw=1 , ls ='-.')
         ax2.plot(dataset['y-cum']  , color='r', lw=1 , ls ='-.')
+        ax2.axhline()
 
         ax3.plot(dataset['x-ber'] , color='g', lw=1 , ls ='-.')
         ax3.plot(dataset['y-ber'] , color='r', lw=1 , ls ='-.')
-        ax3.plot(dataset['n-ber'] , color='k', lw=1 , ls ='-.');
+        ax3.plot(dataset['n-ber'] , color='k', lw=1 , ls ='-.')
+        ax3.axhline()
         st.pyplot()
-        
+
         st.write("Initial balance: ".format(mp_slice.initial_balance()) )
         st.write("Opening range: ".format(mp_slice.open_range()))
         st.write("POC: ".format(mp_slice.poc_price))
         st.write("Profile range: ".format(mp_slice.profile_range))
         st.write("Value area: ".format(mp_slice.value_area))
-        st.write("Balanced Target: " format(mp_slice.balanced_target))
+        st.write("Balanced Target: ".format(mp_slice.balanced_target))
 
 
 if __name__ == "__main__":
