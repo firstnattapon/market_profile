@@ -19,10 +19,10 @@ class Run_model(object) :
         self.limit     = 5000
         self.rolling = 168
         self.broker = 'binance'
-        
+ 
     def mp (self):
-        exchange = getattr(ccxt ,self.broker)()
-        #exchange = ccxt.binance({'apiKey': '' ,'secret': ''  , 'enableRateLimit': True }) 
+        exchange = getattr(ccxt , self.broker)
+        exchange = exchange({'apiKey': '' ,'secret': ''  , 'enableRateLimit': True }) 
         ohlcv =exchange.fetch_ohlcv(self.pair_data, self.timeframe , limit=self.limit )
         ohlcv = exchange.convert_ohlcv_to_trading_view(ohlcv)
         df =  pd.DataFrame(ohlcv)
