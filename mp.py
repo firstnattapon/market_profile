@@ -72,7 +72,7 @@ class Run_model(object) :
         ax3.axhline()
         
         ax4.plot(dataset['std'] , color='k', lw=1 , ls ='-.')
-        ax4.axhline()
+#         ax4.axhline()
         st.pyplot()
 
         st.write("Initial balance: {}".format(mp_slice.initial_balance()) )
