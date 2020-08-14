@@ -78,7 +78,8 @@ class Run_model(object) :
 
 if __name__ == "__main__":
     model =  Run_model()
-    model.pair_data =   st.sidebar.selectbox('data' ,('BTC/USDT', 'XRP/USDT' , 'EOS/USDT' ,'LINK/USDT' , 'ATOM/USDT' , 'THETA/USDT' ,  'XTZ/USDT' , 'ALGO/USDT' ))
+    model.pair_data =   st.sidebar.text_input("data", 'BTC/USDT')
+    #model.pair_data =   st.sidebar.selectbox('data' ,('BTC/USDT', 'XRP/USDT' , 'EOS/USDT' ,'LINK/USDT' , 'ATOM/USDT' , 'THETA/USDT' ,  'XTZ/USDT' , 'ALGO/USDT' ))
     model.timeframe =   st.sidebar.selectbox('timeframe',('1h', '4h' ,'1d' ,'1w'))
     model.loop_start =  np.datetime64(st.sidebar.date_input('loop_start', value= dt.datetime(2020, 7, 1, 0, 0)))
     model.limit     =  st.sidebar.number_input('limit' , value= 5000 )
