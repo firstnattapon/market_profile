@@ -21,7 +21,7 @@ class Run_model(object) :
         self.broker = 'binance'
         
     def mp (self):
-        exchange = getattr(ccxt ,self.broker)
+        exchange = getattr(ccxt ,self.broker)()
         #exchange = ccxt.binance({'apiKey': '' ,'secret': ''  , 'enableRateLimit': True }) 
         ohlcv =exchange.fetch_ohlcv(self.pair_data, self.timeframe , limit=self.limit )
         ohlcv = exchange.convert_ohlcv_to_trading_view(ohlcv)
@@ -82,7 +82,6 @@ if __name__ == "__main__":
     model =  Run_model()
     model.broker =      st.sidebar.text_input("exchange", 'binance')
     model.pair_data =   st.sidebar.text_input("data", 'BTC/USDT')
-    #model.pair_data =   st.sidebar.selectbox('data' ,('BTC/USDT', 'XRP/USDT' , 'EOS/USDT' ,'LINK/USDT' , 'ATOM/USDT' , 'THETA/USDT' ,  'XTZ/USDT' , 'ALGO/USDT' ))
     model.timeframe =   st.sidebar.selectbox('timeframe',('1h', '4h' ,'1d' ,'1w'))
     model.loop_start =  np.datetime64(st.sidebar.date_input('loop_start', value= dt.datetime(2020, 7, 1, 0, 0)))
     model.limit     =  st.sidebar.number_input('limit' , value= 5000 )
