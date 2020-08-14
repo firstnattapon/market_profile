@@ -46,7 +46,7 @@ class Run_model(object) :
         dataset['std'] = sc.fit_transform(dataset[['std']])
         mp = MarketProfile(dataset)
         mp_slice = mp[dataset.index.min():dataset.index.max()]
-        fig , (ax1, ax2 ,ax3 , ax3) = plt.subplots(4 , figsize=(16, 24))
+        fig , (ax1, ax2 ,ax3 , ax4) = plt.subplots(4 , figsize=(16, 24))
         ax1.plot(dataset.Close , color='m'  , ls ='-.')
         ax1.axhline(y = mp_slice.poc_price , color='k' , ls ='--' ,lw= 2.5)
         ax1.axhline(y = mp_slice.value_area[0] , color='r' , ls ='--' ,lw= 2.5)
@@ -72,7 +72,7 @@ class Run_model(object) :
         ax3.axhline()
         
         ax4.plot(dataset['std'] , color='k', lw=1 , ls ='-.')
-        ax3.axhline()
+        ax4.axhline()
         st.pyplot()
 
         st.write("Initial balance: {}".format(mp_slice.initial_balance()) )
