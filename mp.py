@@ -40,11 +40,13 @@ class Run_model(object) :
         dataset['y-ber'] = dataset['y'].rolling(self.rolling).mean()
         dataset['n-ber'] =   dataset['x-ber'] - dataset['y-ber']
         dataset['sp']     = dataset['x-cum'] - dataset['y-cum']
+        dataset['std'] = abs(dataset['sp']).std()
         sc = MinMaxScaler(feature_range=(0,1))
         dataset['sp']  = sc.fit_transform(dataset[['sp']])
+        dataset['std'] = sc.fit_transform(dataset[['std']])
         mp = MarketProfile(dataset)
         mp_slice = mp[dataset.index.min():dataset.index.max()]
-        fig , (ax1, ax2 ,ax3) = plt.subplots(3 , figsize=(16, 24))
+        fig , (ax1, ax2 ,ax3 , ax3) = plt.subplots(4 , figsize=(16, 24))
         ax1.plot(dataset.Close , color='m'  , ls ='-.')
         ax1.axhline(y = mp_slice.poc_price , color='k' , ls ='--' ,lw= 2.5)
         ax1.axhline(y = mp_slice.value_area[0] , color='r' , ls ='--' ,lw= 2.5)
@@ -67,6 +69,9 @@ class Run_model(object) :
         ax3.plot(dataset['x-ber'] , color='g', lw=1 , ls ='-.')
         ax3.plot(dataset['y-ber'] , color='r', lw=1 , ls ='-.')
         ax3.plot(dataset['n-ber'] , color='k', lw=1 , ls ='-.')
+        ax3.axhline()
+        
+        ax4.plot(dataset['std'] , color='k', lw=1 , ls ='-.')
         ax3.axhline()
         st.pyplot()
 
