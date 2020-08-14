@@ -40,10 +40,10 @@ class Run_model(object) :
         dataset['y-ber'] = dataset['y'].rolling(self.rolling).mean()
         dataset['n-ber'] =   dataset['x-ber'] - dataset['y-ber']
         dataset['sp']     = dataset['x-cum'] - dataset['y-cum']
-        dataset['std'] = abs(dataset['sp']).std()
+        dataset['std'] = abs(dataset['pct_change']).rolling(self.rolling).std()
         sc = MinMaxScaler(feature_range=(0,1))
         dataset['sp']  = sc.fit_transform(dataset[['sp']])
-#         dataset['std'] = sc.fit_transform(dataset[['std']])
+        dataset['std'] = sc.fit_transform(dataset[['std']])
         mp = MarketProfile(dataset)
         mp_slice = mp[dataset.index.min():dataset.index.max()]
         fig , (ax1, ax2 ,ax3 , ax4) = plt.subplots(4 , figsize=(16, 24))
@@ -72,7 +72,7 @@ class Run_model(object) :
         ax3.axhline()
         
         ax4.plot(dataset['std'] , color='k', lw=1 , ls ='-.')
-#         ax4.axhline()
+        ax4.axhline()
         st.pyplot()
 
         st.write("Initial balance: {}".format(mp_slice.initial_balance()) )
