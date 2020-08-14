@@ -43,7 +43,7 @@ class Run_model(object) :
         dataset['std'] = abs(dataset['sp']).std()
         sc = MinMaxScaler(feature_range=(0,1))
         dataset['sp']  = sc.fit_transform(dataset[['sp']])
-        dataset['std'] = sc.fit_transform(dataset[['std']])
+#         dataset['std'] = sc.fit_transform(dataset[['std']])
         mp = MarketProfile(dataset)
         mp_slice = mp[dataset.index.min():dataset.index.max()]
         fig , (ax1, ax2 ,ax3 , ax4) = plt.subplots(4 , figsize=(16, 24))
