@@ -94,27 +94,11 @@ pd.set_option("display.precision", 6)
 #     model.rolling = st.sidebar.number_input('rolling' , value= 168 )
 #     mp = model.mp()
 
-import pandas as pd
 
-import streamlit as st
-import streamlit.components.v1 as components
+row1 = st.empty() #// or st.row()?
 
-_selectable_data_table = components.declare_component(
-    "selectable_data_table", url="http://localhost:3001",
-)
+row1col1 = row1.col(width=100) # // either width or width_ratio
+row1col2 = row1.col(width_ratio=1) #// If it is 1, or there's not enough space left, fill the remainder
 
-
-def selectable_data_table(data, key=None):
-    return _selectable_data_table(data=data, default=[], key=key)
-
-
-raw_data = {
-    "First Name": ["Jason", "Molly", "Tina", "Jake", "Amy"],
-    "Last Name": ["Miller", "Jacobson", "Ali", "Milner", "Smith"],
-    "Age": [42, 52, 36, 24, 73],
-}
-df = pd.DataFrame(raw_data, columns=["First Name", "Last Name", "Age"])
-
-rows = selectable_data_table(df)
-if rows:
-    st.write("You have selected", rows)
+row1col1.button("Hello")
+row1col2.button("Hello")
