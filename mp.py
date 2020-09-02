@@ -95,7 +95,7 @@ pd.set_option("display.precision", 6)
 #     mp = model.mp()
 
 
-row1 = st.empty() #// or st.row()?
+row1 =  st.row()
 
 row1col1 = row1.col() # // either width or width_ratio
 row1col2 = row1.col() #// If it is 1, or there's not enough space left, fill the remainder
