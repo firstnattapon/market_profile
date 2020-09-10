@@ -6,3 +6,4 @@ seaborn
 numpy 
 scikit-learn
 marketprofile
+pandas-ta
